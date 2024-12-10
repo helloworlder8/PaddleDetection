@@ -1,0 +1,30 @@
+# 整体结构
+_BASE_: [
+  '../datasets/roadsign_voc.yml', #数据集
+  '_base_/yolov3_mobilenet_v1.yml', #网络结构
+  '_base_/optimizer_40e.yml', #优化器配置
+
+  '_base_/yolov3_reader.yml', #数据读取以及数据加强 这里有batch-size
+  '../runtime.yml', #运行配置
+]
+pretrain_weights: https://paddledet.bj.bcebos.com/models/yolov3_mobilenet_v1_270e_coco.pdparams #加载预训练权重
+weights: output/yolov3_mobilenet_v1_roadsign/model_final #
+
+YOLOv3Loss:
+  ignore_thresh: 0.7
+  label_smooth: true
+
+
+# #其他配置的路径都是相对于当前文件路径
+# _BASE_: [
+#   '../datasets/coco_detection.yml', #训练所需数据集  共享数据集配置目录
+#   '_base_/rtdetr_r50vd.yml', #网络结构
+#   '_base_/optimizer_6x.yml', #优化器配置
+
+#   '_base_/rtdetr_reader.yml', #数据读取以及数据加强
+#   '../runtime.yml', #运行时候的配置 共享运行参数配置目录
+# ]
+
+# weights: output/rtdetr_r50vd_6x_coco/model_final 
+# find_unused_parameters: True
+# log_iter: 200

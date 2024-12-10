@@ -1,0 +1,8 @@
+_BASE_: [
+  '../datasets/coco_detection.yml', #数据集配置
+  '../runtime.yml', #运行配置 包括打印
+  '_base_/optimizer_1x.yml', #优化器配置
+  '_base_/faster_rcnn_r50_fpn.yml', #网络结构
+  '_base_/faster_fpn_reader.yml', #数据读取
+]
+weights: output/faster_rcnn_r50_fpn_1x_coco/model_final #输出权重路径
