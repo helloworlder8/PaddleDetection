@@ -1,0 +1,31 @@
+_BASE_: [
+  '../../datasets/mot.yml',
+  '../../runtime.yml',
+  '_base_/optimizer_30e.yml',
+  '_base_/fairmot_dla34.yml',
+  '_base_/fairmot_reader_1088x608.yml',
+]
+
+weights: output/fairmot_dla34_30e_1088x608/model_final
+
+# Fair Multi-Object Tracking 
+
+TrainDataset:
+  !MOTDataSet
+    dataset_dir: /home/easyits/ang/datasets/mot/MOT16
+    image_lists: ['mot16.train']
+    data_fields: ['image', 'gt_bbox', 'gt_class', 'gt_ide']
+
+# for MOT evaluation
+# If you want to change the MOT evaluation dataset, please modify 'data_root'
+EvalMOTDataset:
+  !MOTImageFolder
+    dataset_dir: /home/easyits/ang/datasets/mot
+    data_root: MOT16/images/train
+    keep_ori_im: False # set True if save visualization images or video, or used in DeepSORT
+
+# for MOT video inference
+TestMOTDataset:
+  !MOTImageFolder
+    dataset_dir: /home/easyits/ang/datasets/mot
+    keep_ori_im: True # set True if save visualization images or video

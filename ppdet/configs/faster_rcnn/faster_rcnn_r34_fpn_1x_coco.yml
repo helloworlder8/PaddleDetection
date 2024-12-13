@@ -1,0 +1,15 @@
+_BASE_: [
+  'faster_rcnn_r50_fpn_1x_coco.yml', #基础
+]
+
+# 重载
+pretrain_weights: https://paddledet.bj.bcebos.com/models/pretrained/ResNet34_pretrained.pdparams 
+weights: output/faster_rcnn_r34_fpn_1x_coco/model_final
+#重载了主干网络
+ResNet:
+  # index 0 stands for res2
+  depth: 34 #重载了网络结构
+  norm_type: bn
+  freeze_at: 0
+  return_idx: [0,1,2,3]
+  num_stages: 4

@@ -1,0 +1,50 @@
+# metric: COCO
+# num_classes: 80
+
+# TrainDataset: #训练使用的数据集
+#   name: COCODataSet #真正的数据集类
+#   image_dir: /home/easyits/ang/PaddleDetection/rdd-1/train
+#   anno_path: /home/easyits/ang/PaddleDetection/rdd-1/train/_annotations.coco.json
+
+#   dataset_dir: dataset/coco
+#   data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+
+# EvalDataset:
+#   name: COCODataSet
+#   image_dir: /home/easyits/ang/PaddleDetection/rdd-1/train
+#   anno_path: /home/easyits/ang/PaddleDetection/rdd-1/train/_annotations.coco.json
+
+#   dataset_dir: dataset/coco
+#   allow_empty: true
+
+# TestDataset:
+#   name: ImageFolder
+#   image_dir: /home/easyits/ang/PaddleDetection/rdd-1/train
+#   anno_path: /home/easyits/ang/PaddleDetection/rdd-1/train/_annotations.coco.json
+
+
+
+
+metric: COCO
+num_classes: 4
+
+TrainDataset: #训练使用的数据集
+  name: COCODataSet #真正的数据集类
+  image_dir: /home/easyits/ang/datasets/bolt_loosen_1130_v2.v3i.coco/train
+  anno_path: /home/easyits/ang/datasets/bolt_loosen_1130_v2.v3i.coco/train/_annotations.coco.json
+
+  dataset_dir: dataset/coco
+  data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+
+EvalDataset:
+  name: COCODataSet
+  image_dir: /home/easyits/ang/datasets/bolt_loosen_1130_v2.v3i.coco/valid
+  anno_path: /home/easyits/ang/datasets/bolt_loosen_1130_v2.v3i.coco/valid/_annotations.coco.json
+
+  dataset_dir: dataset/coco
+  allow_empty: true
+
+TestDataset:
+  name: ImageFolder
+  image_dir: /home/easyits/ang/datasets/bolt_loosen_1130_v2.v3i.coco/test
+  anno_path: /home/easyits/ang/datasets/bolt_loosen_1130_v2.v3i.coco/test/_annotations.coco.json
