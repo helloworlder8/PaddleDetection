@@ -1,0 +1,57 @@
+# 整体配置文件
+_BASE_: [
+  '../../datasets/mot.yml',
+  '../../runtime.yml',
+'_base_/optimizer_30e.yml',
+  '_base_/fairmot_dla34.yml', #网络架构
+  '_base_/fairmot_reader_1088x608.yml',
+]
+
+weights: output/fairmot_dla34_30e_1088x608/model_final
+
+# Fair Multi-Object Tracking 
+
+TrainDataset:
+  !MOTDataSet
+    dataset_dir: /home/easyits/ang/datasets/mot
+    image_lists: ['mot16.train']
+    data_fields: ['image', 'gt_bbox', 'gt_class', 'gt_tid'] #数据集类中需要包含一些什么信息
+# for MOT evaluation
+# If you want to change the MOT evaluation dataset, please modify 'data_root'
+EvalMOTDataset:
+  !MOTImageFolder
+    dataset_dir: /home/easyits/ang/datasets/mot
+    data_root: MOT16/images/train
+    keep_ori_im: False # set True if save visualization images or video, or used in DeepSORT
+
+# for MOT video inference
+TestMOTDataset:
+  !MOTImageFolder
+    dataset_dir: /home/easyits/ang/datasets/mot
+    keep_ori_im: True # set True if save visualization images or video
+
+
+
+# metric: MOT
+# num_classes: 1
+
+# # for MOT training
+# TrainDataset: #这里的数据集是一个类
+#   !MOTDataSet
+#     dataset_dir: dataset/mot
+#     image_lists: ['mot17.train', 'caltech.all', 'cuhksysu.train', 'prw.train', 'citypersons.train', 'eth.train']
+#     data_fields: ['image', 'gt_bbox', 'gt_class', 'gt_tid']
+
+# # for MOT evaluation
+# # If you want to change the MOT evaluation dataset, please modify 'data_root'
+# EvalMOTDataset:
+#   !MOTImageFolder
+#     dataset_dir: dataset/mot
+#     data_root: MOT16/images/train
+#     keep_ori_im: False # set True if save visualization images or video, or used in DeepSORT
+
+# # for MOT video inference
+# TestMOTDataset:
+#   !MOTImageFolder
+#     dataset_dir: dataset/mot
+#     keep_ori_im: True # set True if save visualization images or video
